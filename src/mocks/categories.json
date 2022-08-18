@@ -1,0 +1,6 @@
+[
+  { "id": 1, "categoryName": "Men's Clothing" },
+  { "id": 2, "categoryName": "Women's Clothing" },
+  { "id": 3, "categoryName": "Electronics" },
+  { "id": 4, "categoryName": "Jeweleries" }
+]
