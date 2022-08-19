@@ -13,9 +13,9 @@ export class UsersService {
   findAll(): Promise<User[]> {
     return this.usersRepository.find();
   }
-  async getUserById(data): Promise<User[]> {
+  async getUserById(data: number): Promise<User[]> {
     const user = await this.usersRepository.findOneBy({ id: data });
-    return await [user];
+    return [user];
   }
   async addNewUser(data: UserDto): Promise<User[]> {
     const user = new User();
@@ -25,5 +25,26 @@ export class UsersService {
 
     await this.usersRepository.save(user);
     return await this.findAll();
+  }
+  async updateUser(data: UserDto): Promise<User[]> {
+    const result = await this.usersRepository
+      .createQueryBuilder()
+      .update({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      })
+      .where({
+        id: data.id,
+      })
+      .returning('*')
+      .execute();
+
+    return await result.raw[0];
+  }
+
+  async deleteUser(data: number) {
+    const result = await this.usersRepository.delete({ id: data });
+    return result;
   }
 }

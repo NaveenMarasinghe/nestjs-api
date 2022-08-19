@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { User } from 'src/entities/user.entities';
 import { UserDto } from 'src/interfaces/user.dto';
@@ -13,12 +21,22 @@ export class UsersController {
   }
 
   @Get(':id')
-  getProductById(@Param() params): Promise<User[]> {
+  getUserById(@Param() params): Promise<User[]> {
     return this.usersService.getUserById(params.id);
   }
 
   @Post()
-  addNewProduct(@Body() user: UserDto) {
+  addNewUser(@Body() user: UserDto) {
     return this.usersService.addNewUser(user);
+  }
+
+  @Put()
+  updateUser(@Body() user: UserDto) {
+    return this.usersService.updateUser(user);
+  }
+
+  @Delete(':id')
+  deleteUser(@Param() params) {
+    return this.usersService.deleteUser(params.id);
   }
 }
