@@ -1,14 +1,17 @@
 import { Module } from '@nestjs/common';
-import { ProductsModule } from './modules/products.module';
 import { UsersModule } from './modules/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { User } from './entities/user.entities';
+import { ProductsModule } from './modules/products.module';
+import { TenantsModule } from './modules/tenants.module';
+import { CategoriesModule } from './modules/categories.module';
 
 @Module({
   imports: [
-    ProductsModule,
     UsersModule,
+    ProductsModule,
+    TenantsModule,
+    CategoriesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -16,7 +19,7 @@ import { User } from './entities/user.entities';
       username: 'postgres',
       password: 'postgres',
       database: 'test',
-      entities: [User],
+      autoLoadEntities: true,
       synchronize: true,
     }),
   ],

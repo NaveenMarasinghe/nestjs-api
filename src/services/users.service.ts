@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/entities/user.entities';
-import { UserDto } from 'src/interfaces/user.dto';
+import { User } from 'src/entities/user.entity';
+import { IUser } from 'src/interfaces/IUser';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -10,14 +10,14 @@ export class UsersService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
   ) {}
-  findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+  async findAll(): Promise<User[]> {
+    return await this.usersRepository.find();
   }
   async getUserById(data: number): Promise<User[]> {
     const user = await this.usersRepository.findOneBy({ id: data });
     return [user];
   }
-  async addNewUser(data: UserDto): Promise<User[]> {
+  async addNewUser(data: IUser): Promise<User[]> {
     const user = new User();
     user.email = data.email;
     user.name = data.name;
@@ -26,7 +26,7 @@ export class UsersService {
     await this.usersRepository.save(user);
     return await this.findAll();
   }
-  async updateUser(data: UserDto): Promise<User[]> {
+  async updateUser(data: IUser, id: number): Promise<User[]> {
     const result = await this.usersRepository
       .createQueryBuilder()
       .update({
@@ -35,7 +35,7 @@ export class UsersService {
         password: data.password,
       })
       .where({
-        id: data.id,
+        id: id,
       })
       .returning('*')
       .execute();

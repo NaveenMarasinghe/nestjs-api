@@ -1,73 +1,59 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# modern-walk-nestjs-api
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+REST API for modern walk app.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Technologies used
+TypeScript, NodeJS, NestJS
 
-## Description
+## Architecture
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Entities
+- Users
+- Products
+- Categories
+- Tenants
 
-## Installation
+### API Specification
 
-```bash
-$ npm install
-```
+#### Base URL
+- `http://{ host }:{ port }/`
 
-## Running the app
+#### Users
 
-```bash
-# development
-$ npm run start
+| Method | Path                 | Description               |
+| -------| ---------------------| --------------------------|
+| GET    | /users| Get all users       |
+| GET    | /users/{id} | Find one user by id           |
+| POST   | /users            | Add a new user              |
+| PUT   | /users/{id}              | Update one user by id          |
+| DELETE   | /users/{id}              | Delete one user by id             |
 
-# watch mode
-$ npm run start:dev
+#### Products
 
-# production mode
-$ npm run start:prod
-```
+| Method | Path                 | Description               |
+| -------| ---------------------| --------------------------|
+| GET    | /products                    | Get all products            |
+| GET   | /products/{id}              | Find one product by id        |
+| POST   | /products             | Add one new product             |
+| PUT   | /products/{id}              | Update one product by id          |
+| DELETE   | /products/{id}              | Delete one product by id             |
 
-## Test
+#### Tenants
 
-```bash
-# unit tests
-$ npm run test
+| Method | Path                 | Description               |
+| -------| ---------------------| --------------------------|
+| GET    | /tenants                    | Get all tenants            |
+| GET   | /tenants/{id}              | Find one tenant by id        |
+| POST   | /tenants             | Add one new tenant             |
+| PUT   | /tenants/{id}              | Update one tenant by id          |
+| DELETE   | /tenant/{id}              | Delete one tenant by id             |
 
-# e2e tests
-$ npm run test:e2e
+#### Categories
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+| Method | Path                 | Description               |
+| -------| ---------------------| --------------------------|
+| GET    | /categories                    | Get all categories            |
+| GET   | /categories/{id}              | Find one category by id        |
+| POST   | /categories             | Add one new category             |
+| PUT   | /categories/{id}              | Update one category by id          |
+| DELETE   | /category/{id}              | Delete one category by id             |

@@ -8,8 +8,8 @@ import {
   Delete,
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
-import { User } from 'src/entities/user.entities';
-import { UserDto } from 'src/interfaces/user.dto';
+import { User } from 'src/entities/user.entity';
+import { IUser } from 'src/interfaces/IUser';
 
 @Controller('users')
 export class UsersController {
@@ -26,13 +26,13 @@ export class UsersController {
   }
 
   @Post()
-  addNewUser(@Body() user: UserDto) {
+  addNewUser(@Body() user: IUser) {
     return this.usersService.addNewUser(user);
   }
 
-  @Put()
-  updateUser(@Body() user: UserDto) {
-    return this.usersService.updateUser(user);
+  @Put(':id')
+  updateUser(@Body() user: IUser, @Param() params) {
+    return this.usersService.updateUser(user, params.id);
   }
 
   @Delete(':id')
