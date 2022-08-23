@@ -5,6 +5,11 @@ import { DataSource } from 'typeorm';
 import { ProductsModule } from './modules/products.module';
 import { TenantsModule } from './modules/tenants.module';
 import { CategoriesModule } from './modules/categories.module';
+import { User } from './entities/user.entity';
+import { Product } from './entities/product.entity';
+import { Tenant } from './entities/tenant.entity';
+import { Category } from './entities/category.entity';
+import { ProductRating } from './entities/productRating.entity';
 
 @Module({
   imports: [
@@ -19,7 +24,7 @@ import { CategoriesModule } from './modules/categories.module';
       username: 'postgres',
       password: 'postgres',
       database: 'test',
-      autoLoadEntities: true,
+      entities: [User, Product, Tenant, Category, ProductRating],
       synchronize: true,
     }),
   ],
