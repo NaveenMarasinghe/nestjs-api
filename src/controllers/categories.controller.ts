@@ -7,7 +7,7 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 import { Category } from 'src/entities/category.entity';
 import { ICategories } from 'src/interfaces/ICategories';
 import { CategoriesService } from 'src/services/categories.sevice';
@@ -22,7 +22,8 @@ export class CategoriesController {
     return this.categoriesService.findAll();
   }
 
-  @Get(':id')
+  @Get('/:id')
+  @ApiParam({ name: 'id' })
   getUserById(@Param() params): Promise<Category[]> {
     return this.categoriesService.getCategoryById(params.id);
   }
@@ -32,12 +33,14 @@ export class CategoriesController {
     return this.categoriesService.addNewCategory(category);
   }
 
-  @Put(':id')
+  @Put('/:id')
+  @ApiParam({ name: 'id' })
   updateUser(@Body() category: ICategories, @Param() params) {
     return this.categoriesService.updateCategory(category, params.id);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
+  @ApiParam({ name: 'id' })
   deleteUser(@Param() params) {
     return this.categoriesService.deleteCategory(params.id);
   }

@@ -10,7 +10,7 @@ import {
 import { UsersService } from '../services/users.service';
 import { User } from 'src/entities/user.entity';
 import { IUser } from 'src/interfaces/IUser';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 
 @Controller('users')
 @ApiTags('Users')
@@ -23,6 +23,7 @@ export class UsersController {
   }
 
   @Get(':id')
+  @ApiParam({ name: 'id' })
   getUserById(@Param() params): Promise<User[]> {
     return this.usersService.getUserById(params.id);
   }
@@ -33,11 +34,13 @@ export class UsersController {
   }
 
   @Put(':id')
+  @ApiParam({ name: 'id' })
   updateUser(@Body() user: IUser, @Param() params) {
     return this.usersService.updateUser(user, params.id);
   }
 
   @Delete(':id')
+  @ApiParam({ name: 'id' })
   deleteUser(@Param() params) {
     return this.usersService.deleteUser(params.id);
   }
