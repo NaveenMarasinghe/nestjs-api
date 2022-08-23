@@ -7,11 +7,13 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Category } from 'src/entities/category.entity';
 import { ICategories } from 'src/interfaces/ICategories';
 import { CategoriesService } from 'src/services/categories.sevice';
 
 @Controller('categories')
+@ApiTags('Categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 

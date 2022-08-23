@@ -7,11 +7,13 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Tenant } from 'src/entities/tenant.entity';
 import { ITenant } from 'src/interfaces/ITenant';
 import { TenantsService } from 'src/services/tenants.service';
 
 @Controller('tenants')
+@ApiTags('Tenants')
 export class TenantsController {
   constructor(private readonly tenantsService: TenantsService) {}
 
