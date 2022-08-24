@@ -7,7 +7,7 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { Category } from 'src/categories/category.entity';
 import { ICategories } from 'src/categories/ICategories';
 import { CategoriesService } from 'src/categories/categories.sevice';
@@ -28,11 +28,13 @@ export class CategoriesController {
     return this.categoriesService.getCategoryById(params.id);
   }
 
+  @ApiBody({ type: Category })
   @Post()
   addNewUser(@Body() category: ICategories) {
     return this.categoriesService.addNewCategory(category);
   }
 
+  @ApiBody({ type: Category })
   @Put('/:id')
   @ApiParam({ name: 'id' })
   updateUser(@Body() category: ICategories, @Param() params) {

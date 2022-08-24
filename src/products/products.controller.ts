@@ -10,7 +10,7 @@ import {
 import { ProductsService } from './products.service';
 import { Product } from 'src/products/product.entity';
 import { IProduct } from 'src/products/IProduct';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 
 @Controller('products')
 @ApiTags('Products')
@@ -28,11 +28,13 @@ export class ProductsController {
     return this.productsService.getProductById(params.id);
   }
 
+  @ApiBody({ type: Product })
   @Post()
   addNewUser(@Body() user: IProduct) {
     return this.productsService.addNewProduct(user);
   }
 
+  @ApiBody({ type: Product })
   @Put(':id')
   @ApiParam({ name: 'id' })
   updateUser(@Body() user: IProduct, @Param() params) {

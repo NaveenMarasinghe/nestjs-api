@@ -7,7 +7,7 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { Tenant } from 'src/tenants/tenant.entity';
 import { ITenant } from 'src/tenants/ITenant';
 import { TenantsService } from 'src/tenants/tenants.service';
@@ -28,11 +28,13 @@ export class TenantsController {
     return this.tenantsService.getTenantById(params.id);
   }
 
+  @ApiBody({ type: Tenant })
   @Post()
   addNewUser(@Body() tenant: ITenant) {
     return this.tenantsService.addNewTenant(tenant);
   }
 
+  @ApiBody({ type: Tenant })
   @Put(':id')
   @ApiParam({ name: 'id' })
   updateUser(@Body() tenant: ITenant, @Param() params) {
