@@ -30,7 +30,9 @@ export class Product {
   @Column()
   image: string;
 
-  @OneToOne(() => ProductRating, (rating) => rating.product, { cascade: true })
+  @OneToOne(() => ProductRating, (rating) => rating.product, {
+    cascade: true,
+  })
   @JoinColumn()
   rating: ProductRating;
 }

@@ -10,6 +10,8 @@ export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private productsRepository: Repository<Product>,
+    @InjectRepository(ProductRating)
+    private productRatingsRepository: Repository<ProductRating>,
   ) {}
   async findAll(): Promise<Product[]> {
     return await this.productsRepository.find({ relations: { rating: true } });
@@ -23,7 +25,6 @@ export class ProductsService {
   }
   async addNewProduct(data: IProduct): Promise<Product[]> {
     const productRating = new ProductRating();
-    productRating.count = data.rating.count;
     productRating.rate = data.rating.rate;
 
     const product = new Product();
@@ -39,7 +40,7 @@ export class ProductsService {
     return await this.findAll();
   }
   async updateProduct(data: IProduct, id: number): Promise<Product[]> {
-    const result = await this.productsRepository
+    await this.productsRepository
       .createQueryBuilder()
       .update(Product)
       .set({
@@ -56,7 +57,19 @@ export class ProductsService {
       .returning('*')
       .execute();
 
-    return await result.raw[0];
+    await this.productRatingsRepository
+      .createQueryBuilder()
+      .update(ProductRating)
+      .set({
+        rate: data.rating.rate,
+      })
+      .where({
+        productId: id,
+      })
+      .returning('*')
+      .execute();
+
+    return await this.getProductById(id);
   }
 
   async deleteProduct(data: number) {

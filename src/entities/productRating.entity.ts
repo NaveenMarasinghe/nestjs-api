@@ -6,8 +6,8 @@ export class ProductRating {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  count: number;
+  @Column({ nullable: true })
+  productId: number;
 
   @Column({ type: 'float' })
   rate: number;
