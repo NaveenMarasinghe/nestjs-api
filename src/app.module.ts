@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './modules/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { ProductsModule } from './modules/products.module';
-import { TenantsModule } from './modules/tenants.module';
-import { CategoriesModule } from './modules/categories.module';
-import { User } from './entities/user.entity';
-import { Product } from './entities/product.entity';
-import { Tenant } from './entities/tenant.entity';
-import { Category } from './entities/category.entity';
-import { ProductRating } from './entities/productRating.entity';
+import { ProductsModule } from './products/products.module';
+import { TenantsModule } from './tenants/tenants.module';
+import { CategoriesModule } from './categories/categories.module';
+import { User } from './users/user.entity';
+import { Product } from './products/product.entity';
+import { Tenant } from './tenants/tenant.entity';
+import { Category } from './categories/category.entity';
+import { ProductRating } from './products/productRating.entity';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [

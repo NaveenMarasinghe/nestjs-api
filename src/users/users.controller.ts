@@ -7,9 +7,9 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { UsersService } from '../services/users.service';
-import { User } from 'src/entities/user.entity';
-import { IUser } from 'src/interfaces/IUser';
+import { UsersService } from './users.service';
+import { User } from 'src/users/user.entity';
+import { IUser } from 'src/users/IUser';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 
 @Controller('users')

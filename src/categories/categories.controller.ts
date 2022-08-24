@@ -8,9 +8,9 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
-import { Category } from 'src/entities/category.entity';
-import { ICategories } from 'src/interfaces/ICategories';
-import { CategoriesService } from 'src/services/categories.sevice';
+import { Category } from 'src/categories/category.entity';
+import { ICategories } from 'src/categories/ICategories';
+import { CategoriesService } from 'src/categories/categories.sevice';
 
 @Controller('categories')
 @ApiTags('Categories')

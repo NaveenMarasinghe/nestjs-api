@@ -7,9 +7,9 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { ProductsService } from '../services/products.service';
-import { Product } from 'src/entities/product.entity';
-import { IProduct } from 'src/interfaces/IProduct';
+import { ProductsService } from './products.service';
+import { Product } from 'src/products/product.entity';
+import { IProduct } from 'src/products/IProduct';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 
 @Controller('products')
