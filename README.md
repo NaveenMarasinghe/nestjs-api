@@ -1,9 +1,9 @@
-# modern-walk-nestjs-api
+# nestjs-api
 
-REST API for modern walk app.
+REST API using NestJS
 
 ## Technologies used
-TypeScript, NodeJS, NestJS
+TypeScript, NodeJS, NestJS, TypeORM, PostgreSQL
 
 ## Architecture
 
