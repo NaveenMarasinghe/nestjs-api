@@ -10,6 +10,8 @@ import { Tenant } from './tenants/tenant.entity';
 import { Category } from './categories/category.entity';
 import { ProductRating } from './products/productRating.entity';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -27,7 +29,9 @@ import { UsersModule } from './users/users.module';
       entities: [User, Product, Tenant, Category, ProductRating],
       synchronize: true,
     }),
+    AuthModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {
   constructor(private dataSource: DataSource) {}

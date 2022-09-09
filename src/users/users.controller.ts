@@ -17,33 +17,33 @@ import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get()
-  getAllUsers(): Promise<User[]> {
-    return this.usersService.findAll();
-  }
+  // @Get()
+  // getAllUsers(): Promise<User[]> {
+  //   return this.usersService.findAll();
+  // }
 
   @Get(':id')
-  @ApiParam({ name: 'id' })
+  @ApiParam({ name: 'username' })
   getUserById(@Param() params): Promise<User[]> {
-    return this.usersService.getUserById(params.id);
+    return this.usersService.findOne(params.username);
   }
 
-  @ApiBody({ type: User })
-  @Post()
-  addNewUser(@Body() user: IUser) {
-    return this.usersService.addNewUser(user);
-  }
+  // @ApiBody({ type: User })
+  // @Post()
+  // addNewUser(@Body() user: IUser) {
+  //   return this.usersService.addNewUser(user);
+  // }
 
-  @ApiBody({ type: User })
-  @Put(':id')
-  @ApiParam({ name: 'id' })
-  updateUser(@Body() user: IUser, @Param() params) {
-    return this.usersService.updateUser(user, params.id);
-  }
+  // @ApiBody({ type: User })
+  // @Put(':id')
+  // @ApiParam({ name: 'id' })
+  // updateUser(@Body() user: IUser, @Param() params) {
+  //   return this.usersService.updateUser(user, params.id);
+  // }
 
-  @Delete(':id')
-  @ApiParam({ name: 'id' })
-  deleteUser(@Param() params) {
-    return this.usersService.deleteUser(params.id);
-  }
+  // @Delete(':id')
+  // @ApiParam({ name: 'id' })
+  // deleteUser(@Param() params) {
+  //   return this.usersService.deleteUser(params.id);
+  // }
 }
