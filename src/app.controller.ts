@@ -2,6 +2,9 @@ import { Controller, Get, Request, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/guards/local-auth.guard';
 import { AuthService } from './auth/auth.service';
+import { Roles } from './auth/roles.decorator';
+import { Role } from './auth/role.enum';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 export class AppController {
@@ -15,6 +18,7 @@ export class AppController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
+  @Roles(Role.Admin)
   getProfile(@Request() req) {
     return req.user;
   }

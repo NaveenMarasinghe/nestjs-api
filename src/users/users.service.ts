@@ -1,24 +1,50 @@
 import { Injectable } from '@nestjs/common';
-
-// This should be a real class/interface representing a user entity
-export type User = any;
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './user.entity';
 
 @Injectable()
 export class UsersService {
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
+  async findAll(): Promise<User[]> {
+    return await this.usersRepository.find();
+  }
+  async findOne(username: string): Promise<User> {
+    const user = await this.usersRepository.findOneBy({ name: username });
+    return user;
+  }
+  async addNewUser(data: User): Promise<User[]> {
+    const user = new User();
+    user.email = data.email;
+    user.name = data.name;
+    user.password = data.password;
 
-  async findOne(username: string): Promise<User | undefined> {
-    return this.users.find((user) => user.username === username);
+    await this.usersRepository.save(user);
+    return await this.findAll();
+  }
+  async updateUser(data: User, id: number): Promise<User[]> {
+    const result = await this.usersRepository
+      .createQueryBuilder()
+      .update({
+        email: data.email,
+        password: data.password,
+        name: data.name,
+        roles: data.roles,
+      })
+      .where({
+        id: id,
+      })
+      .returning('*')
+      .execute();
+
+    return await result.raw[0];
+  }
+
+  async deleteUser(data: number) {
+    const result = await this.usersRepository.delete({ id: data });
+    return result;
   }
 }
