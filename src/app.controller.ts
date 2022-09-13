@@ -5,6 +5,7 @@ import { AuthService } from './auth/auth.service';
 import { Roles } from './auth/roles.decorator';
 import { Role } from './auth/role.enum';
 import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from './auth/guards/roles.guard';
 
 @Controller()
 export class AppController {
@@ -16,7 +17,7 @@ export class AppController {
     return this.authService.login(req.user);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get('profile')
   @Roles(Role.Admin)
   getProfile(@Request() req) {
