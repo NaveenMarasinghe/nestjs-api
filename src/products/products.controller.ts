@@ -11,7 +11,7 @@ import {
 import { ProductsService } from './products.service';
 import { Product } from 'src/products/product.entity';
 import { IProduct } from 'src/products/IProduct';
-import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
@@ -37,6 +37,7 @@ export class ProductsController {
   @ApiBody({ type: Product })
   @Post()
   @Roles(Role.Admin)
+  @ApiBearerAuth('JWT-auth')
   addNewUser(@Body() user: IProduct) {
     return this.productsService.addNewProduct(user);
   }
@@ -46,6 +47,7 @@ export class ProductsController {
   @Put(':id')
   @Roles(Role.Admin)
   @ApiParam({ name: 'id' })
+  @ApiBearerAuth('JWT-auth')
   updateUser(@Body() user: IProduct, @Param() params) {
     return this.productsService.updateProduct(user, params.id);
   }
@@ -54,6 +56,7 @@ export class ProductsController {
   @Delete(':id')
   @Roles(Role.Admin)
   @ApiParam({ name: 'id' })
+  @ApiBearerAuth('JWT-auth')
   deleteUser(@Param() params) {
     return this.productsService.deleteProduct(params.id);
   }

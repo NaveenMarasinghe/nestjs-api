@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { Tenant } from 'src/tenants/tenant.entity';
 import { ITenant } from 'src/tenants/ITenant';
 import { TenantsService } from 'src/tenants/tenants.service';
@@ -37,6 +37,7 @@ export class TenantsController {
   @ApiBody({ type: Tenant })
   @Post()
   @Roles(Role.Admin)
+  @ApiBearerAuth('JWT-auth')
   addNewUser(@Body() tenant: ITenant) {
     return this.tenantsService.addNewTenant(tenant);
   }
@@ -46,6 +47,7 @@ export class TenantsController {
   @Put(':id')
   @Roles(Role.Admin)
   @ApiParam({ name: 'id' })
+  @ApiBearerAuth('JWT-auth')
   updateUser(@Body() tenant: ITenant, @Param() params) {
     return this.tenantsService.updateTenant(tenant, params.id);
   }
@@ -54,6 +56,7 @@ export class TenantsController {
   @Delete(':id')
   @Roles(Role.Admin)
   @ApiParam({ name: 'id' })
+  @ApiBearerAuth('JWT-auth')
   deleteUser(@Param() params) {
     return this.tenantsService.deleteTenant(params.id);
   }

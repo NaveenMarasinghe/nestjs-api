@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { Category } from 'src/categories/category.entity';
 import { ICategories } from 'src/categories/ICategories';
 import { CategoriesService } from 'src/categories/categories.sevice';
@@ -25,6 +25,7 @@ export class CategoriesController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
   @Roles(Role.Admin)
+  @ApiBearerAuth('JWT-auth')
   getAllUsers(): Promise<Category[]> {
     return this.categoriesService.findAll();
   }
@@ -39,6 +40,7 @@ export class CategoriesController {
   @ApiBody({ type: Category })
   @Post()
   @Roles(Role.Admin)
+  @ApiBearerAuth('JWT-auth')
   addNewUser(@Body() category: ICategories) {
     return this.categoriesService.addNewCategory(category);
   }
@@ -48,6 +50,7 @@ export class CategoriesController {
   @Put('/:id')
   @Roles(Role.Admin)
   @ApiParam({ name: 'id' })
+  @ApiBearerAuth('JWT-auth')
   updateUser(@Body() category: ICategories, @Param() params) {
     return this.categoriesService.updateCategory(category, params.id);
   }
@@ -56,6 +59,7 @@ export class CategoriesController {
   @Delete('/:id')
   @Roles(Role.Admin)
   @ApiParam({ name: 'id' })
+  @ApiBearerAuth('JWT-auth')
   deleteUser(@Param() params) {
     return this.categoriesService.deleteCategory(params.id);
   }

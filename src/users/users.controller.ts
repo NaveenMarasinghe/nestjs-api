@@ -11,7 +11,7 @@ import {
 import { UsersService } from './users.service';
 import { User } from 'src/users/user.entity';
 import { IUser, Role } from 'src/users/IUser';
-import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
@@ -36,6 +36,7 @@ export class UsersController {
   @ApiBody({ type: User })
   @Post()
   @Roles(Role.Admin)
+  @ApiBearerAuth('JWT-auth')
   addNewUser(@Body() user: IUser) {
     return this.usersService.addNewUser(user);
   }
@@ -45,6 +46,7 @@ export class UsersController {
   @Put(':id')
   @Roles(Role.Admin)
   @ApiParam({ name: 'id' })
+  @ApiBearerAuth('JWT-auth')
   updateUser(@Body() user: IUser, @Param() params) {
     return this.usersService.updateUser(user, params.id);
   }
@@ -53,6 +55,7 @@ export class UsersController {
   @Delete(':id')
   @Roles(Role.Admin)
   @ApiParam({ name: 'id' })
+  @ApiBearerAuth('JWT-auth')
   deleteUser(@Param() params) {
     return this.usersService.deleteUser(params.id);
   }
