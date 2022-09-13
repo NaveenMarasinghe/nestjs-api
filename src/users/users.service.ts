@@ -12,8 +12,8 @@ export class UsersService {
   async findAll(): Promise<User[]> {
     return await this.usersRepository.find();
   }
-  async findOne(username: string): Promise<User> {
-    const user = await this.usersRepository.findOneBy({ name: username });
+  async findOne(email: string): Promise<User> {
+    const user = await this.usersRepository.findOneBy({ email: email });
     return user;
   }
   async addNewUser(data: User): Promise<User[]> {
@@ -21,6 +21,7 @@ export class UsersService {
     user.email = data.email;
     user.name = data.name;
     user.password = data.password;
+    user.roles = data.roles;
 
     await this.usersRepository.save(user);
     return await this.findAll();
