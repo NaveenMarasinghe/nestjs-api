@@ -9,6 +9,8 @@ import { jwtConstants } from './constants';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { LoggerMiddleware } from '../middleware/logger.middleware';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { PwlessTokens } from 'src/helpers/pwlessTokens.entity';
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { LoggerMiddleware } from '../middleware/logger.middleware';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60s' },
     }),
+    TypeOrmModule.forFeature([PwlessTokens]),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],

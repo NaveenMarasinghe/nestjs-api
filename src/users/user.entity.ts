@@ -17,3 +17,12 @@ export class User {
   @Column({ type: 'text', array: true, default: [] })
   roles;
 }
+
+@Entity()
+export class UserLogin {
+  @Column()
+  email: string;
+
+  @Column()
+  password: string;
+}

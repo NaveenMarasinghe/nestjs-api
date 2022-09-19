@@ -9,3 +9,8 @@ export interface IUser {
   id: number;
   roles: string[];
 }
+
+export interface IUserLogin {
+  email: string;
+  password: string;
+}

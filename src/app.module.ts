@@ -15,6 +15,7 @@ import { AppController } from './app.controller';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/guards/roles.guard';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { PwlessTokens } from './helpers/pwlessTokens.entity';
 
 @Module({
   imports: [
@@ -29,7 +30,7 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
       username: 'postgres',
       password: 'postgres',
       database: 'test',
-      entities: [User, Product, Tenant, Category, ProductRating],
+      entities: [User, Product, Tenant, Category, ProductRating, PwlessTokens],
       synchronize: true,
     }),
     AuthModule,
