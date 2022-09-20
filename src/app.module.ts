@@ -28,7 +28,7 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
       port: 5432,
       username: 'postgres',
       password: 'postgres',
-      database: 'test',
+      database: 'postgres',
       entities: [User, Product, Tenant, Category, ProductRating],
       synchronize: true,
     }),
