@@ -22,10 +22,7 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
-  @Roles(Role.Admin)
-  @ApiBearerAuth('JWT-auth')
   getAllUsers(): Promise<Category[]> {
     return this.categoriesService.findAll();
   }

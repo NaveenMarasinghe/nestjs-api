@@ -12,4 +12,6 @@ ENV PORT=3000
 
 EXPOSE 3000
 
-CMD [ "npm", "start" ]
+RUN npm run build
+
+CMD [ "node", "dist/main" ]

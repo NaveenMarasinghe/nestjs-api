@@ -14,7 +14,9 @@ export class TenantsService {
     return await this.tenantsRepository.find();
   }
   async getTenantById(data: number): Promise<Tenant[]> {
-    const tenant = await this.tenantsRepository.findOneBy({ id: data });
+    const tenant = await this.tenantsRepository.findOne({
+      where: { id: data },
+    });
     return [tenant];
   }
   async addNewTenant(data: ITenant): Promise<Tenant[]> {

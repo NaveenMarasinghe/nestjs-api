@@ -14,7 +14,9 @@ export class CategoriesService {
     return await this.categoriesRepository.find();
   }
   async getCategoryById(data: number): Promise<Category[]> {
-    const category = await this.categoriesRepository.findOneBy({ id: data });
+    const category = await this.categoriesRepository.findOne({
+      where: { id: data },
+    });
     return [category];
   }
   async addNewCategory(data: ICategories): Promise<Category[]> {

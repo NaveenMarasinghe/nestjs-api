@@ -32,7 +32,7 @@ export class UsersController {
     return this.usersService.findOne(params.username);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiBody({ type: User })
   @Post()
   @Roles(Role.Admin)
@@ -41,7 +41,7 @@ export class UsersController {
     return this.usersService.addNewUser(user);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiBody({ type: User })
   @Put(':id')
   @Roles(Role.Admin)

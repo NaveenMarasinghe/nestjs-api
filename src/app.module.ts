@@ -1,6 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
 import { ProductsModule } from './products/products.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { CategoriesModule } from './categories/categories.module';
@@ -24,12 +23,12 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
     CategoriesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'db',
       port: 5432,
       username: 'postgres',
       password: 'postgres',
       database: 'postgres',
-      entities: [User, Product, Tenant, Category, ProductRating],
+      autoLoadEntities: true,
       synchronize: true,
     }),
     AuthModule,

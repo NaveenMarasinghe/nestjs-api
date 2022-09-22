@@ -14,12 +14,11 @@ export class ProductsService {
     private productRatingsRepository: Repository<ProductRating>,
   ) {}
   async findAll(): Promise<Product[]> {
-    return await this.productsRepository.find({ relations: { rating: true } });
+    return await this.productsRepository.find();
   }
   async getProductById(data: number): Promise<Product[]> {
     const product = await this.productsRepository.findOne({
       where: { id: data },
-      relations: { rating: true },
     });
     return [product];
   }

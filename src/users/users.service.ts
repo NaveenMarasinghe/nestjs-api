@@ -13,7 +13,9 @@ export class UsersService {
     return await this.usersRepository.find();
   }
   async findOne(email: string): Promise<User> {
-    const user = await this.usersRepository.findOneBy({ email: email });
+    const user = await this.usersRepository.findOne({
+      where: { email: email },
+    });
     return user;
   }
   async addNewUser(data: User): Promise<User[]> {
