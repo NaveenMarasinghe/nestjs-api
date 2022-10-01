@@ -7,7 +7,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./src:/app/src
+      - ./src:/work/src
     depends_on:
       - db
 
